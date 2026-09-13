@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Type//Tutor — Learn Touch Typing</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="gateView">
+  <div class="gate-card">
+    <div class="gate-eyebrow">Welcome to</div>
+    <div class="gate-title" id="gateInstituteName">Aksharo Touch-Type Institute</div>
+    <div class="gate-made-by">Made by Hasan Abdullah</div>
+
+    <div id="gateLoginBlock">
+      <div class="gate-field">
+        <label for="gateIdInput">Continue with your ID</label>
+        <input id="gateIdInput" placeholder="e.g. TT-4F92-K1QZ" autocomplete="off" />
+      </div>
+      <button class="btn-primary btn-block" id="gateContinueBtn">Continue →</button>
+      <div class="gate-divider">or</div>
+      <button class="btn-secondary btn-block" id="gateNewIdBtn">I'm new — create an ID</button>
+      <div class="gate-note">No email or password needed. Your ID is just a key to your saved progress in this browser — write it down so you can come back to it.</div>
+    </div>
+
+    <div id="gateNewIdBlock" class="hidden">
+      <div class="intro-text" style="margin-bottom:10px;">Here's your new ID. Save it — it's the only way back to this progress.</div>
+      <div class="gate-new-id" id="gateNewIdValue">TT-XXXX-XXXX</div>
+      <button class="btn-primary btn-block" id="gateStartBtn">Start learning →</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden">
+
+  <header id="topbar">
+    <div class="brand-block">
+      <div class="brand">TYPE//TUTOR</div>
+      <div class="made-by">Made by Hasan Abdullah</div>
+    </div>
+    <div class="topbar-right">
+      <div class="chip">🔥 <span id="streakVal">0</span></div>
+      <div class="chip">🏅 <span id="badgeVal">0</span></div>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙</button>
+    </div>
+  </header>
+
+  <div id="mainShell">
+    <aside id="sidebar">
+      <div id="sidebarList"></div>
+    </aside>
+
+    <main id="mainCol">
+
+      <section id="dashboardView">
+        <div class="panel hero-panel">
+          <div>
+            <div class="hero-eyebrow">Your progress · 2-month course</div>
+            <div class="hero-big" id="progressPct">0%</div>
+            <div class="muted" id="progressText">0 of 0 lessons complete</div>
+          </div>
+          <button class="btn-primary" id="continueBtn2">Continue →</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Your course map — click any day, nothing is locked</div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <div class="panel-title">Speed over time</div>
+            <svg id="sparkline" width="100%" height="140" viewBox="0 0 400 140" preserveAspectRatio="none"></svg>
+            <div class="muted small" id="sparklineEmpty">Complete a few lessons to see your speed trend here.</div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Badges</div>
+            <div id="badgeGrid" class="badge-grid"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Weak-key drill</div>
+          <div class="muted small" style="margin-bottom:10px;">Practice built from the keys you mistype most often.</div>
+          <button class="btn-secondary" id="weakDrillBtn">Practice my weak keys</button>
+        </div>
+      </section>
+
+      <section id="dayView" class="hidden">
+        <div class="day-view-header">
+          <button class="icon-btn" id="dayBackBtn">⌂</button>
+          <div class="day-view-title" id="dayViewTitle">Day 1</div>
+        </div>
+        <div class="lesson-card-list" id="dayLessonList"></div>
+      </section>
+
+      <section id="lessonView" class="hidden">
+        <div class="lesson-header">
+          <button class="icon-btn" id="exitLessonBtn">⌂</button>
+          <div class="lesson-header-title" id="lessonTitle">Lesson</div>
+          <div class="lesson-stats" id="lessonStatsBar">
+            <span id="statWpm">0 <b>WPM</b></span>
+            <span id="statAcc">100% <b>ACC</b></span>
+            <span id="statTime">0s</span>
+          </div>
+        </div>
+
+        <div class="round-bar" id="roundBar">
+          <div class="round-text" id="roundText">Round 1 / 15</div>
+          <div class="round-track"><div class="round-fill" id="roundFill"></div></div>
+        </div>
+
+        <div id="introStage" class="intro-wrap hidden">
+          <div class="intro-heading" id="introHeading">New keys</div>
+          <div class="intro-text" id="introText">Rest your fingers on the highlighted keys.</div>
+          <div class="intro-keys" id="introKeys"></div>
+          <button class="btn-primary" id="introContinueBtn">Start practice →</button>
+        </div>
+
+        <div class="passage-wrap hidden" id="passageWrap">
+          <div class="passage" id="passageEl"></div>
+          <input id="hiddenInput" class="hidden-input" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        </div>
+
+        <div class="game-stage-wrap hidden" id="gameStageWrap">
+          <div id="gameContainer"></div>
+          <input id="gameHiddenInput" class="hidden-input" style="position:static; opacity:0; height:1px;" autocomplete="off" autocapitalize="off" spellcheck="false" />
+        </div>
+
+        <div id="handsContainer" class="hands-container"></div>
+        <div id="keyboardContainer" class="keyboard"></div>
+        <div id="legendContainer" class="legend"></div>
+      </section>
+
+      <section id="certView" class="hidden">
+        <div class="cert-wrap">
+          <div class="certificate">
+            <div class="cert-eyebrow">Certificate of Completion</div>
+            <div class="cert-title">Touch Typing Mastery</div>
+            <div class="cert-line">awarded to</div>
+            <input class="cert-name-input" id="certNameInput" placeholder="Type your name" />
+            <div class="cert-line">for completing every lesson with</div>
+            <div class="cert-stats">
+              <div><span class="cert-num" id="certWpm">0</span><span class="cert-label">WPM</span></div>
+              <div><span class="cert-num" id="certAcc">0%</span><span class="cert-label">Accuracy</span></div>
+            </div>
+            <div class="cert-date" id="certDate"></div>
+          </div>
+          <button class="btn-secondary" id="certBackBtn" style="margin-top:20px;">Back to dashboard</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div id="lessonCompleteModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="modal-title" id="completeModalTitle">Lesson complete!</div>
+    <div id="starsEl" class="stars"></div>
+    <div class="result-grid">
+      <div><div class="result-num" id="resWpm">0</div><div class="muted small">WPM</div></div>
+      <div><div class="result-num" id="resAcc">0%</div><div class="muted small">Accuracy</div></div>
+    </div>
+    <div class="modal-actions">
+      <button id="retryBtn" class="btn-secondary">↺ Retry</button>
+      <button id="continueBtnModal" class="btn-primary">Continue (Enter) →</button>
+    </div>
+  </div>
+</div>
+
+<div id="settingsModal" class="modal-backdrop hidden">
+  <div class="modal">
+    <div class="modal-title-row">
+      <div class="modal-title">Settings</div>
+      <button class="icon-btn" id="closeSettingsBtn">✕</button>
+    </div>
+    <div class="settings-row">
+      <span>Sound effects</span>
+      <button class="icon-btn" id="soundToggle">🔊</button>
+    </div>
+    <div class="settings-row">
+      <span>Text size</span>
+      <input type="range" min="16" max="30" id="fontSizeRange" />
+    </div>
+    <div class="settings-row" style="flex-direction:column; align-items:flex-start; gap:6px;">
+      <span>Your ID (save this!)</span>
+      <span class="settings-id" id="settingsIdValue">—</span>
+    </div>
+    <button class="btn-secondary" id="switchUserBtn" style="margin-top:10px; width:100%;">Switch user / log out</button>
+    <button class="btn-secondary" id="resetProgressBtn" style="margin-top:10px; width:100%;">Reset all progress</button>
+  </div>
+</div>
+
+<div id="roundToast" class="round-toast hidden"></div>
+
+<script src="data.js"></script>
+<script src="games.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
